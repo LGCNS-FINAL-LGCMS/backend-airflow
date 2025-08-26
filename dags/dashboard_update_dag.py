@@ -14,6 +14,7 @@ kst_tz=timezone(timedelta(hours=9))
 
 with DAG(
     dag_id="sync_batch_job_dag",
+    default_args=default_args,
     start_date=datetime(2025, 8, 24, tzinfo=kst_tz),
     schedule="@daily",
     catchup=False,
