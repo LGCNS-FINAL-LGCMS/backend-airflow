@@ -1,15 +1,21 @@
-from __future__ import annotations
-
 import json
-import pendulum
 
-from airflow.models.dag import DAG
+from datetime import datetime, timedelta, timezone
+from airflow import DAG
 from airflow.providers.http.operators.http import HttpOperator
+
+default_args={
+    'retries': 3,
+    'retry_delay': timedelta(minutes=10),
+    'execution_timeout': timedelta(hours=1),
+}
+
+kst_tz=timezone(timedelta(hours=9))
 
 with DAG(
     dag_id="sync_batch_job_dag",
-    start_date=pendulum.datetime(2025, 8, 24, tz="Asia/Seoul"),
-    schedule=None,
+    start_date=datetime(2025, 8, 24, tzinfo=kst_tz),
+    schedule="@daily",
     catchup=False,
     tags=["batch", "api"],
 ) as dag:
