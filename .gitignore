@@ -3,3 +3,4 @@ logs
 plugins
 .env
 docker-compose.yaml
+dags/__pycache__
