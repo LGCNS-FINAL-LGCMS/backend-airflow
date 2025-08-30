@@ -92,4 +92,4 @@ with DAG(
         log_response=True,
     )
 
-    daily_data_update_job >> [daily_profit_job, monthly_profit_status_job, progress_group_job, student_lecture_count_job, complete_progress_job]
+    daily_data_update_job >> daily_profit_job >> monthly_profit_status_job >> progress_group_job >> student_lecture_count_job >> complete_progress_job
